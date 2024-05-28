@@ -1,0 +1,188 @@
+/* Importera Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Grundläggande styling för hela sidan */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Fyller hela skärmen */
+}
+
+/* Styling för header och footer */
+header, footer {
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Hindrar header och footer från att krympa */
+}
+
+header h1, footer p {
+    margin: 0;
+    padding: 0.5em 0;
+    font-weight: 600;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 1em;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffc107;
+}
+
+/* Styling för huvudsektionen */
+main {
+    padding: 2em;
+    max-width: 900px;
+    margin: 2em auto;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 1; /* Expanderar för att fylla resten av sidan */
+    display: flex;
+    flex-direction: column;
+}
+
+main:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+h2 {
+    text-align: center;
+    font-weight: 600;
+    color: #007bff;
+    margin-bottom: 1em;
+}
+
+#posts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.post {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    width: calc(33% - 2em);
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.post h3 {
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.post p {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.post a, .post form button {
+    display: inline-block;
+    margin: 0.5em 0;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.post a:hover, .post form button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
+
+form {
+    margin-top: 2em;
+    text-align: center;
+}
+
+form div {
+    margin-bottom: 1em;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+}
+
+form textarea {
+    width: 100%;
+    padding: 0.75em;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+}
+
+form textarea:focus {
+    border-color: #007bff;
+}
+
+form button {
+    padding: 0.75em 2em;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+form button:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+}
+
+/* Responsiv design */
+@media (max-width: 768px) {
+    .post {
+        width: calc(50% - 2em);
+    }
+}
+
+@media (max-width: 480px) {
+    .post {
+        width: 100%;
+    }
+}
