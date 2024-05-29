@@ -1,50 +1,40 @@
-import express from "express";
-import bodyParser from "body-parser";
+<%- include('partials/header') %>
 
-const app = express();
-const port = 3000;
+<main>
+    <h2>Dina Inlägg</h2>
+    <div id="posts">
+        <% blogPosts.forEach((post, index) => { %>
+            <div class="post">
+                <h3>Inlägg <%= index + 1 %></h3>
+                <p><%= post %></p>
+                <a href="/edit/<%= index %>"><i class="fas fa-edit"></i> Redigera</a>
+                <form action="/delete" method="POST" style="display:inline;">
+                    <input type="hidden" name="index" value="<%= index %>">
+                    <button type="submit"><i class="fas fa-trash-alt"></i> Ta Bort</button>
+                </form>
+            </div>
+        <% }) %>
+    </div>
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.set("view engine", "ejs");
-app.use(express.static('public'));
+    <% if (typeof editIndex !== 'undefined' && editIndex !== null) { %>
+        <h2>Redigera Inlägg</h2>
+        <form action="/edit/<%= editIndex %>" method="POST">
+            <div>
+                <label for="editedPost">Inlägg:</label>
+                <textarea id="editedPost" name="editedPost" required><%= postToEdit %></textarea>
+            </div>
+            <button type="submit">Uppdatera Inlägg</button>
+        </form>
+    <% } else { %>
+        <h2>Skapa Nytt Inlägg</h2>
+        <form action="/" method="POST">
+            <div>
+                <label for="blogtext">Inlägg:</label>
+                <textarea id="blogtext" name="blogtext" required></textarea>
+            </div>
+            <button type="submit">Skapa Inlägg</button>
+        </form>
+    <% } %>
+</main>
 
-let blogPosts = [];
-let editIndex = null;
-
-// Route för att visa startsidan med alla inlägg
-app.get("/", (req, res) => {
-  res.render("index", { blogPosts: blogPosts, editIndex: editIndex, postToEdit: blogPosts[editIndex] });
-});
-
-// Route för att lägga till ett nytt inlägg
-app.post("/", (req, res) => {
-  const blogText = req.body.blogtext;
-  blogPosts.push(blogText);
-  res.redirect("/");
-});
-
-// Route för att redigera ett inlägg (visa redigeringsformulär)
-app.get("/edit/:index", (req, res) => {
-  editIndex = req.params.index;
-  res.redirect("/");
-});
-
-// Route för att hantera redigering av ett inlägg
-app.post("/edit/:index", (req, res) => {
-  const index = req.params.index;
-  const editedPost = req.body.editedPost;
-  blogPosts[index] = editedPost;
-  editIndex = null;
-  res.redirect("/");
-});
-
-// Route för att radera ett inlägg
-app.post("/delete", (req, res) => {
-  const index = req.body.index;
-  blogPosts.splice(index, 1);
-  res.redirect("/");
-});
-
-app.listen(port, () => {
-  console.log("Servern körs på port ${port}");
-});
+<%- include('partials/footer') %>
